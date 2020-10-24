@@ -7,11 +7,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Unit test for simple App.
  */
 public class AppTest 
 {
+    static final Logger logger = LogManager.getLogger(App.class.getName());
 
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
@@ -42,6 +46,11 @@ public class AppTest
 
         Student student1 = new Student("Nicusor", "Dan", "M", "1986-05-16", "1860516123456");
         assertEquals("M", student1.getGender());
+    }
+
+    @Test
+    public void testRetrieveStudentsByAge() {
+
     }
 
 }

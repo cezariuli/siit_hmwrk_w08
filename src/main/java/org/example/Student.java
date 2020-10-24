@@ -9,9 +9,10 @@ public class Student {
     private String firstName;
     private String lastName;
     private String birthDate;
+    private int birthYear;
     private String gender;
     private String id;
-    private int age;
+
     private final int currentYear = 2020;
 
     public Student(String firstName, String lastName, String gender, String birthDate, String id) {
@@ -32,8 +33,7 @@ public class Student {
 
         if(birthDate.matches("^(19|20)\\d\\d[-\\/\\.](0[1-9]|1[012])[-\\/\\.](0[1-9]|1[0-9]|2[0-9]|3[01])$")) {
             this.birthDate = birthDate;
-            int birthYear = Integer.parseInt(birthDate.substring(0,4));
-            calculateAge(birthYear);
+            this.birthYear = Integer.parseInt(birthDate.substring(0,4));
         } else {
             throw new IllegalArgumentException("Incorrect format for birthdate");
         }
@@ -56,14 +56,6 @@ public class Student {
         }
     }
 
-    private void calculateAge(int birthYear ) {
-        this.age = currentYear - birthYear;
-
-        if (age < 0) {
-            throw new IndexOutOfBoundsException("Birth date error: age is negative");
-        }
-    }
-
     public String getName() {
         return this.lastName + " " + this.firstName;
     }
@@ -77,7 +69,14 @@ public class Student {
     }
 
     public int getAge() {
-        return this.age;
+        int age;
+        age = this.currentYear - this.birthYear;
+        if ( age >= 0 ) {
+            return age;
+        } else {
+            throw new IndexOutOfBoundsException("Birth date error: age is negative");
+        }
+
     }
 
     public String getBirthDate() {
